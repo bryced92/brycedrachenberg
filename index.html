@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bryce J. Drachenberg — Portfolio</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Georgia, 'Times New Roman', serif; background: #f5f4f1; color: #1a1a1a; }
+    .site-header { background: #fff; border-bottom: 1px solid rgba(0,0,0,0.1); padding: 2.5rem 2rem 2rem; text-align: center; }
+    .site-header .tagline { font-size: 0.95rem; color: #666; font-style: italic; margin-bottom: 0.5rem; }
+    .site-header h1 { font-size: 2.2rem; font-weight: 400; letter-spacing: 0.05em; }
+    .site-header nav { margin-top: 1.25rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+    .site-header nav a { font-family: Arial, sans-serif; font-size: 0.78rem; color: #666; text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; }
+    .site-header nav a:hover { color: #1a1a1a; }
+    .section { padding: 3.5rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .section-label { font-family: Arial, sans-serif; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #999; margin-bottom: 0.4rem; }
+    .section-title { font-size: 1.5rem; font-weight: 400; margin-bottom: 0.6rem; }
+    .section-desc { font-family: Arial, sans-serif; font-size: 0.9rem; color: #666; margin-bottom: 2rem; max-width: 640px; line-height: 1.7; }
+    hr.rule { border: none; border-top: 1px solid rgba(0,0,0,0.1); margin: 0 0 2.5rem; }
+    .storymap-slot { background: #fff; border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden; margin-bottom: 2.5rem; }
+    .storymap-slot .embed-area { width: 100%; line-height: 0; }
+    .storymap-slot .embed-area iframe { width: 100%; height: 500px; display: block; border: none; }
+    .potree-link { display: flex; align-items: center; justify-content: center; height: 380px; background: #1a1e24; text-decoration: none; flex-direction: column; gap: 1rem; }
+    .potree-link:hover { background: #22282f; }
+    .potree-icon { width: 64px; height: 64px; background: rgba(90,138,154,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; }
+    .potree-label { font-family: Arial, sans-serif; font-size: 0.95rem; color: #8ab4c2; letter-spacing: 0.04em; text-align: center; padding: 0 2rem; }
+    .potree-sub { font-family: Arial, sans-serif; font-size: 0.78rem; color: #5a7a8a; }
+    .slot-meta { padding: 1.25rem 1.5rem; border-top: 1px solid rgba(0,0,0,0.08); }
+    .slot-meta h3 { font-size: 1.05rem; font-weight: 400; }
+    .slot-meta p { font-family: Arial, sans-serif; font-size: 0.875rem; color: #666; margin-top: 0.3rem; line-height: 1.6; }
+    .slot-meta .tags { margin-top: 0.75rem; display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .tag { font-family: Arial, sans-serif; font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; padding: 3px 9px; border-radius: 4px; background: #e8edf3; color: #4a6070; }
+    .ext-link { display: inline-block; margin-top: 0.75rem; font-family: Arial, sans-serif; font-size: 0.8rem; color: #4a6070; text-decoration: none; border-bottom: 1px solid rgba(74,96,112,0.3); padding-bottom: 1px; }
+    .ext-link:hover { color: #1a1a1a; }
+    .model-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+    .model-card { background: #fff; border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden; }
+    .model-card .sketchfab-embed-wrapper { display: block; line-height: 0; }
+    .model-card .sketchfab-embed-wrapper iframe { width: 100%; height: 300px; display: block; border: none; }
+    .model-card .sketchfab-embed-wrapper p { display: none; }
+    .model-card-meta { padding: 1rem 1.25rem; }
+    .model-card-meta h3 { font-size: 1rem; font-weight: 400; }
+    .model-card-meta p { font-family: Arial, sans-serif; font-size: 0.82rem; color: #666; margin-top: 0.25rem; line-height: 1.5; }
+    .model-card-meta a { font-family: Arial, sans-serif; font-size: 0.78rem; color: #4a6070; text-decoration: none; border-bottom: 1px solid rgba(74,96,112,0.3); }
+    .model-card-meta a:hover { color: #1a1a1a; }
+    .linked-card { background: #fff; border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden; margin-bottom: 2.5rem; display: flex; align-items: stretch; min-height: 160px; text-decoration: none; color: inherit; transition: box-shadow 0.2s; }
+    .linked-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .linked-card-accent { width: 6px; background: #3a6080; flex-shrink: 0; }
+    .linked-card-body { padding: 1.5rem 1.75rem; display: flex; flex-direction: column; justify-content: center; gap: 0.4rem; }
+    .linked-card-label { font-family: Arial, sans-serif; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: #999; font-weight: 600; }
+    .linked-card-title { font-size: 1.15rem; font-weight: 400; }
+    .linked-card-desc { font-family: Arial, sans-serif; font-size: 0.875rem; color: #666; line-height: 1.6; max-width: 560px; }
+    .linked-card-url { font-family: Arial, sans-serif; font-size: 0.78rem; color: #4a6070; margin-top: 0.25rem; }
+    .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .photo-card { background: #fff; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden; }
+    .photo-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+    .photo-slot { width: 100%; aspect-ratio: 4/3; background: #dde3ea; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.5rem; color: #7a8a9a; font-family: Arial, sans-serif; }
+    .photo-slot .icon { font-size: 1.75rem; }
+    .photo-slot span { font-size: 0.75rem; color: #9aabba; }
+    .photo-card-meta { padding: 0.75rem 1rem; }
+    .photo-card-meta h4 { font-family: Arial, sans-serif; font-size: 0.875rem; font-weight: 600; }
+    .photo-card-meta p { font-family: Arial, sans-serif; font-size: 0.8rem; color: #666; margin-top: 0.15rem; }
+    .contact-strip { background: #fff; border-top: 1px solid rgba(0,0,0,0.1); padding: 3rem 2rem; text-align: center; }
+    .contact-strip h2 { font-size: 1.2rem; font-weight: 400; margin-bottom: 0.4rem; }
+    .contact-strip p { font-family: Arial, sans-serif; font-size: 0.875rem; color: #666; }
+    .contact-strip .links { display: flex; justify-content: center; gap: 2rem; margin-top: 1rem; flex-wrap: wrap; }
+    .contact-strip .links a { font-family: Arial, sans-serif; font-size: 0.875rem; color: #666; text-decoration: none; }
+    .contact-strip .links a:hover { color: #1a1a1a; }
+    @media (max-width: 600px) {
+      .section { padding: 2rem 1rem; }
+      .storymap-slot .embed-area iframe { height: 320px; }
+      .site-header h1 { font-size: 1.6rem; }
+      .linked-card { flex-direction: column; }
+      .linked-card-accent { width: 100%; height: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <p class="tagline">Research · Storytelling · Spatial Humanities</p>
+  <h1>Bryce J. Drachenberg</h1>
+  <nav>
+    <a href="#storymaps">Storymaps</a>
+    <a href="#web">Web Projects</a>
+    <a href="#models">3D Models</a>
+    <a href="#lidar">LiDAR</a>
+    <a href="#photography">Photography</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- STORYMAPS -->
+<div id="storymaps" class="section">
+  <p class="section-label">Digital Narratives</p>
+  <h2 class="section-title">ArcGIS Storymaps</h2>
+  <p class="section-desc">Interactive digital publications combining archival research, spatial data, and visual storytelling for public and educational audiences.</p>
+  <hr class="rule">
+
+  <div class="storymap-slot">
+    <div class="embed-area">
+      <iframe src="https://storymaps.arcgis.com/stories/49d33b1ae5c44716927724fed9e3c09b" width="100%" height="500px" frameborder="0" allowfullscreen allow="geolocation"></iframe>
+    </div>
+    <div class="slot-meta">
+      <h3>The History of the CCC in Arkansas</h3>
+      <p>A digital publication series documenting the Civilian Conservation Corps legacy across Arkansas — combining archival imagery, spatial narrative, and oral history into an interactive public exhibit.</p>
+      <div class="tags">
+        <span class="tag">ArcGIS StoryMap</span><span class="tag">Archival Research</span><span class="tag">Public History</span><span class="tag">CAST / ANCRC</span><span class="tag">2024–2025</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="storymap-slot">
+    <div class="embed-area">
+      <iframe src="https://storymaps.arcgis.com/stories/a72a5420ec9a400f99daf46c80aa9a15" width="100%" height="500px" frameborder="0" allowfullscreen allow="geolocation"></iframe>
+    </div>
+    <div class="slot-meta">
+      <h3>Arkansas Heritage Collections: Cane Hill Stoneware</h3>
+      <p>Studio photography and 3D photogrammetric documentation of historic ceramics from the Cane Hill community, published as an interactive ArcGIS digital exhibit exploring material culture and craft heritage.</p>
+      <div class="tags">
+        <span class="tag">ArcGIS StoryMap</span><span class="tag">Material Culture</span><span class="tag">Photography</span><span class="tag">Photogrammetry</span><span class="tag">CAST 2024</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WEB PROJECTS -->
+<div id="web" class="section">
+  <p class="section-label">Web Design</p>
+  <h2 class="section-title">Designed Web Projects</h2>
+  <p class="section-desc">Visual and narrative design for public-facing digital projects — experience and content design without writing the underlying code.</p>
+  <hr class="rule">
+
+  <a class="linked-card" href="https://oak.cast.uark.edu/ccc/" target="_blank" rel="noopener">
+    <div class="linked-card-accent"></div>
+    <div class="linked-card-body">
+      <span class="linked-card-label">Website · CAST / ANCRC</span>
+      <span class="linked-card-title">The CCC in Arkansas — CAST Project Site</span>
+      <span class="linked-card-desc">Designed the visual layout, narrative structure, and content architecture for this public heritage website documenting the Civilian Conservation Corps in Arkansas. Contributed archival research, photography, and digital storytelling strategy.</span>
+      <span class="linked-card-url">oak.cast.uark.edu/ccc/ ↗</span>
+    </div>
+  </a>
+</div>
+
+<!-- 3D MODELS -->
+<div id="models" class="section">
+  <p class="section-label">Photogrammetry · Object Documentation</p>
+  <h2 class="section-title">3D Models</h2>
+  <p class="section-desc">High-resolution 3D documentation of artifacts and structures produced using drone photogrammetry and close-range photogrammetry in Agisoft Metashape.</p>
+  <hr class="rule">
+
+  <div class="model-grid">
+
+    <div class="model-card">
+      <a href="https://view3d.cast.uark.edu/petitjean/paviliona/" target="_blank" rel="noopener"
+         style="display:flex;align-items:center;justify-content:center;height:300px;background:#1a1e24;text-decoration:none;flex-direction:column;gap:0.75rem;">
+        <div style="width:56px;height:56px;background:rgba(90,138,154,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">⬡</div>
+        <span style="font-family:Arial,sans-serif;font-size:0.9rem;color:#8ab4c2;">View Interactive Model</span>
+        <span style="font-family:Arial,sans-serif;font-size:0.75rem;color:#5a7a8a;">Opens in CAST 3D Viewer ↗</span>
+      </a>
+      <div class="model-card-meta">
+        <h3>Petitjean State Park — Pavilion A</h3>
+        <p>Drone-based photogrammetry of the historic CCC-constructed pavilion. Part of the ANCRC heritage documentation initiative.</p>
+        <a href="https://view3d.cast.uark.edu/petitjean/paviliona/" target="_blank" rel="noopener">View in CAST 3D Viewer ↗</a>
+      </div>
+    </div>
+
+    <div class="model-card">
+      <div class="sketchfab-embed-wrapper">
+        <iframe title="College" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/7e4aadba1f0746faaf4c82881e5e472d/embed"></iframe>
+        <p style="display:none"></p>
+      </div>
+      <div class="model-card-meta">
+        <h3>College — Architectural Photogrammetry</h3>
+        <p>Close-range photogrammetric model of a historic college structure. Agisoft Metashape · CAST.</p>
+        <a href="https://sketchfab.com/3d-models/college-7e4aadba1f0746faaf4c82881e5e472d" target="_blank" rel="noopener">View on Sketchfab ↗</a>
+      </div>
+    </div>
+
+    <div class="model-card">
+      <div class="sketchfab-embed-wrapper">
+        <iframe title="Gold" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/046834bce73c49658ba942a0540a0e5a/embed"></iframe>
+        <p style="display:none"></p>
+      </div>
+      <div class="model-card-meta">
+        <h3>Cane Hill Stoneware — Gold Vessel</h3>
+        <p>Close-range photogrammetry of historic stoneware ceramic. Arkansas Heritage Collections · CAST 2024.</p>
+        <a href="https://sketchfab.com/3d-models/gold-046834bce73c49658ba942a0540a0e5a" target="_blank" rel="noopener">View on Sketchfab ↗</a>
+      </div>
+    </div>
+
+    <div class="model-card">
+      <div class="sketchfab-embed-wrapper">
+        <iframe title="Plate Sherd" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/2dbb8e6130024cceb43d373dc526592e/embed"></iframe>
+        <p style="display:none"></p>
+      </div>
+      <div class="model-card-meta">
+        <h3>Cane Hill Stoneware — Plate Sherd</h3>
+        <p>Close-range photogrammetry of a ceramic plate fragment from the Cane Hill collection · CAST 2024.</p>
+        <a href="https://sketchfab.com/3d-models/plate-sherd-2dbb8e6130024cceb43d373dc526592e" target="_blank" rel="noopener">View on Sketchfab ↗</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- LIDAR -->
+<div id="lidar" class="section">
+  <p class="section-label">Aerial LiDAR · Point Cloud Documentation</p>
+  <h2 class="section-title">LiDAR Site Models</h2>
+  <p class="section-desc">Large-scale aerial LiDAR surveys and drone photogrammetry producing high-resolution point cloud models of archaeological and historic sites across Arkansas.</p>
+  <hr class="rule">
+
+  <div class="storymap-slot">
+    <div class="embed-area">
+      <a class="potree-link" href="https://view3d.cast.uark.edu/Parkin/" target="_blank" rel="noopener">
+        <div class="potree-icon">⬡</div>
+        <span class="potree-label">Parkin Archeological State Park — LiDAR Point Cloud</span>
+        <span class="potree-sub">Click to open interactive 3D viewer ↗</span>
+      </a>
+    </div>
+    <div class="slot-meta">
+      <h3>Parkin Archeological State Park</h3>
+      <p>Aerial LiDAR survey producing a high-resolution point cloud model of the Parkin site, a nationally significant Mississippian period archaeological site in Arkansas.</p>
+      <div class="tags">
+        <span class="tag">Aerial LiDAR</span><span class="tag">Point Cloud</span><span class="tag">Archaeology</span><span class="tag">CAST</span>
+      </div>
+      <a class="ext-link" href="https://view3d.cast.uark.edu/Parkin/" target="_blank" rel="noopener">Open in CAST 3D Viewer ↗</a>
+    </div>
+  </div>
+
+  <div class="storymap-slot">
+    <div class="embed-area">
+      <a class="potree-link" href="https://view3d.cast.uark.edu/SansSouci/" target="_blank" rel="noopener">
+        <div class="potree-icon">⬡</div>
+        <span class="potree-label">Sans Souci — LiDAR Point Cloud</span>
+        <span class="potree-sub">Click to open interactive 3D viewer ↗</span>
+      </a>
+    </div>
+    <div class="slot-meta">
+      <h3>Sans Souci</h3>
+      <p>Aerial LiDAR and drone photogrammetry documentation of the Sans Souci historic site, contributing to spatial analysis and preservation planning efforts.</p>
+      <div class="tags">
+        <span class="tag">Aerial LiDAR</span><span class="tag">Drone Photogrammetry</span><span class="tag">Historic Site</span><span class="tag">CAST</span>
+      </div>
+      <a class="ext-link" href="https://view3d.cast.uark.edu/SansSouci/" target="_blank" rel="noopener">Open in CAST 3D Viewer ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- PHOTOGRAPHY -->
+<div id="photography" class="section">
+  <p class="section-label">Visual Documentation</p>
+  <h2 class="section-title">Field & Studio Photography</h2>
+  <p class="section-desc">Artifact documentation, field photography, and aerial imagery from archaeological and heritage projects across Arkansas and beyond.</p>
+  <hr class="rule">
+
+  <div class="photo-grid">
+
+    <!--
+      TO ADD A PHOTO:
+      1. Upload the image file to your GitHub repo (same folder as index.html)
+      2. Replace the entire <div class="photo-slot">...</div> with:
+         <img src="your-filename.jpg" alt="Brief description of the image">
+    -->
+
+    <div class="photo-card">
+      <div class="photo-slot"><div class="icon">📷</div><span>photo1.jpg</span></div>
+      <div class="photo-card-meta"><h4>Artifact Studio Documentation</h4><p>ANCRC / Arkansas State Parks, 2024</p></div>
+    </div>
+
+    <div class="photo-card">
+      <div class="photo-slot"><div class="icon">📷</div><span>photo2.jpg</span></div>
+      <div class="photo-card-meta"><h4>Aerial Survey — Washita Battlefield</h4><p>National Historic Site, Spring 2025</p></div>
+    </div>
+
+    <div class="photo-card">
+      <div class="photo-slot"><div class="icon">📷</div><span>photo3.jpg</span></div>
+      <div class="photo-card-meta"><h4>LiDAR Site Survey — SPARC Initiative</h4><p>Historical site documentation, Fall 2025</p></div>
+    </div>
+
+    <div class="photo-card">
+      <div class="photo-slot"><div class="icon">📷</div><span>photo4.jpg</span></div>
+      <div class="photo-card-meta"><h4>Cane Hill Stoneware Collection</h4><p>Studio photography, CAST 2024</p></div>
+    </div>
+
+    <div class="photo-card">
+      <div class="photo-slot"><div class="icon">📷</div><span>photo5.jpg</span></div>
+      <div class="photo-card-meta"><h4>Fieldwork Documentation — China</h4><p>Cultural documentation, 2019–2022</p></div>
+    </div>
+
+    <div class="photo-card">
+      <div class="photo-slot"><div class="icon">📷</div><span>photo6.jpg</span></div>
+      <div class="photo-card-meta"><h4>Drone Operations — Field Survey</h4><p>FAA Part 107 aerial operations</p></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="contact" class="contact-strip">
+  <h2>Bryce J. Drachenberg, M.A.</h2>
+  <p>Researcher · Digital Humanist · Spatial Storyteller · Fayetteville, Arkansas</p>
+  <div class="links">
+    <a href="mailto:bryced92@gmail.com">bryced92@gmail.com</a>
+    <a href="https://www.linkedin.com/in/YOUR_HANDLE" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.arcgis.com/sharing/rest/content/users/YOUR_ARCGIS_USERNAME" target="_blank" rel="noopener">ArcGIS Profile</a>
+    <a href="https://sketchfab.com/drakenmodels" target="_blank" rel="noopener">Sketchfab</a>
+  </div>
+</footer>
+
+</body>
+</html>
